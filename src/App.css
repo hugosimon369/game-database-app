@@ -1,0 +1,13 @@
+body {
+    background-color: #121212;
+    color: #00e112;
+}
+
+h1 {
+    font-size: xxx-large;
+    justify-self: center;
+}
+
+#SelectorGamesList {
+    background-color: #24fe28;
+}
