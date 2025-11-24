@@ -50,33 +50,33 @@ function App() {
     obtenerJuegos()
   }, [filtro])
 
-  // METODO VIEJO, SINCONO
-  //  useEffect(() => {
-  //    // Probamos si tenemos la llave (Solo para nosotros, en la consola)
-  //    console.log("La API Key es:", API_KEY);
-  //  }, [])
-  //  useEffect(() => {
-  //    setLoading(true)
-  //    const url = `https://api.rawg.io/api/games?key=${API_KEY}`;// 2. PEDIDO: Construimos la URL con nuestra llave. Usamos comillas invertidas `` para insertar la variable.
-  //    console.log("Llamando al Mesero (RAWG)...");
-  //    fetch(url)// 3. FETCH: Llamamos al mesero <----------------------------------------------------
-  //      .then(response => {// El mesero vuelve.
-  //        if (!response.ok) { //Verificamos si trae el plato o una disculpa.
-  //          throw new Error(`Error HTTP: ${response.status}`);
-  //        }
-  //        return response.json(); // "Destapamos" el JSON
-  //      })
-  //      //.then(res => res.json()) // lo mismo de ARRIBA pero simplificado
-  //      .then(data => {
-  //        setLoading(false)
-  //        console.log("¡Datos recibidos!", data);// 4. RECEPCIÓN: Tenemos los datos limpios.
-  //        setGames(data.results);// IMPORTANTE: En RAWG, la lista de juegos no está en 'data' directamente, sino dentro de una propiedad llamada 'results'. Esto es lo que aprendemos siendo "Exploradores".
-  //      })
-  //      .catch(error => {
-  //        setLoading(false)
-  //        console.error("El mesero se tropezó:", error);
-  //      });
-  //  }, []); // Array vacío: Solo pedimos la comida una vez al sentarnos.
+  {/* // METODO VIEJO, SINCONO
+    useEffect(() => {
+      // Probamos si tenemos la llave (Solo para nosotros, en la consola)
+      console.log("La API Key es:", API_KEY);
+    }, [])
+    useEffect(() => {
+      setLoading(true)
+      const url = `https://api.rawg.io/api/games?key=${API_KEY}`;// 2. PEDIDO: Construimos la URL con nuestra llave. Usamos comillas invertidas `` para insertar la variable.
+      console.log("Llamando al Mesero (RAWG)...");
+      fetch(url)// 3. FETCH: Llamamos al mesero <----------------------------------------------------
+        .then(response => {// El mesero vuelve.
+          if (!response.ok) { //Verificamos si trae el plato o una disculpa.
+            throw new Error(`Error HTTP: ${response.status}`);
+          }
+          return response.json(); // "Destapamos" el JSON
+        })
+        //.then(res => res.json()) // lo mismo de ARRIBA pero simplificado
+        .then(data => {
+          setLoading(false)
+          console.log("¡Datos recibidos!", data);// 4. RECEPCIÓN: Tenemos los datos limpios.
+          setGames(data.results);// IMPORTANTE: En RAWG, la lista de juegos no está en 'data' directamente, sino dentro de una propiedad llamada 'results'. Esto es lo que aprendemos siendo "Exploradores".
+        })
+        .catch(error => {
+          setLoading(false)
+          console.error("El mesero se tropezó:", error);
+        });
+    }, []); // Array vacío: Solo pedimos la comida una vez al sentarnos.*/}
 
 
 
@@ -142,23 +142,29 @@ function App() {
       <h2>
         Choise your favorite style to encount the BEST
       </h2>
-      <div>
-        <select name="SelectList" id="SelectorGamesList" onChange={handleSlectorChange}>
-          <option value="best">All</option>
-          <option value="rpg">RPG</option>
-          <option value="shooter">Shooters</option>
-          <option value="mmo">MMO</option>
-          <option value="simulation">Simulation</option>
-          <option value="adventure">Adventure</option>
-          <option value="openWorld">Open World</option>
-        </select>
-        <form onSubmit={(e) => {
-          e.preventDefault(); // ¡no olvidar! Evita que la página se recargue
-          handleSubmitBusqueda();
-        }}>
-          <input type='text' value={busqueda} onChange={handleBusquedaChange} onSubmit={handleSubmitBusqueda}/>
-          <button type="submit">enviar</button>
-        </form>
+      <div className='selector-container'>
+        <div className='selector-item'> 
+          <p>buscar por tipo:</p>
+          <select  name='selector' className="selector-games" onChange={handleSlectorChange}>
+            <option value="best">All</option>
+            <option value="rpg">RPG</option>
+            <option value="shooter">Shooters</option>
+            <option value="mmo">MMO</option>
+            <option value="simulation">Simulation</option>
+            <option value="adventure">Adventure</option>
+            <option value="openWorld">Open World</option>
+          </select>
+        </div>
+        <div className='selector-form'> 
+          <p>buscar por nombre:</p>
+          <form onSubmit={(e) => {
+            e.preventDefault(); // ¡no olvidar! Evita que la página se recargue
+            handleSubmitBusqueda();
+          }}>
+            <input name='form' type='text' value={busqueda} onChange={handleBusquedaChange} onSubmit={handleSubmitBusqueda} />
+            <button type="submit">enviar</button>
+          </form>
+        </div>
       </div>
       <div className='List'>
         {loading && <span className='loading'>cargando datos</span>}

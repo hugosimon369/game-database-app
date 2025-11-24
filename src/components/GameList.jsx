@@ -10,12 +10,13 @@ function SearchBestGames({ onerror, ongames }) {
         <>
             {error && <span className='error'>codigo: {error}</span>}
             <p>Juegos encontrados: {games.length}</p>
-            <ul>
-                {/* Un pequeño adelanto: mostremos los nombres */}
+            <div className="games-container">
                 {games.map(game => (
-                    <li key={game.id}>{game.name}</li>
+                    <div className="games-item" key={game.id}>{game.name}
+                        <img src={game.background_image} alt={`imagen del juego ${game.name}`} title={game.name}/>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </>
     )
 }
