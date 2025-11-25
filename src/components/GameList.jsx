@@ -1,7 +1,8 @@
 import React from "react";
 import App from "../App";
+import { Link } from "react-router-dom"
 
-function SearchBestGames({ onerror, ongames }) {
+function GameList({ onerror, ongames }) {
 
     const games = ongames
     const error = onerror
@@ -12,13 +13,15 @@ function SearchBestGames({ onerror, ongames }) {
             <p>Juegos encontrados: {games.length}</p>
             <div className="games-container">
                 {games.map(game => (
-                    <div className="games-item" key={game.id}>{game.name}
-                        <img src={game.background_image} alt={`imagen del juego ${game.name}`} title={game.name}/>
-                    </div>
+                    <Link to={`/game/${game.id}`}>
+                        <div className="games-item" key={game.id}>{game.name}
+                            <img src={game.background_image} alt={`imagen del juego ${game.name}`} title={game.name} />
+                        </div>
+                    </Link>
                 ))}
             </div>
         </>
     )
 }
 
-export default SearchBestGames
+export default GameList
