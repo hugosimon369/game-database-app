@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import App from "../App";
 import GameList from "../components/GameList";
+import { useSearchParams } from "react-router-dom";
 
 function Home() {
     const API_KEY = import.meta.env.VITE_API_KEY;// Leemos la variable de entorno (El cofre del tesoro)
@@ -12,7 +13,7 @@ function Home() {
 
     const [filtro, setFiltro] = useState({ tipe: '', slug: "" })
 
-    const [pagina, setPagina] = useState("") // Selector de pagina
+    const [selector, setselector] = useState("") // Muestra lista
 
     const [games, setGames] = useState([]);// 1. ESTADO: Inicializamos con un array vacío [] porque esperamos una lista de juegos.
 
@@ -20,14 +21,19 @@ function Home() {
 
     const [error, setError] = useState()
 
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const [pagina, setPagina] = useSearchParams()
+
 
 
     // EFECTOS
 
 
     useEffect(() => { //peticion a la base de datos con ASYNC y AWAIT 
-        const parameters = filtro.tipe
-        const valor = filtro.slug
+        console.log(searchParams)
+        const parameters = searchParams.get("tipe")
+        const valor = searchParams.get("slug")
         setLoading(true)
         const API_KEY_filtro = API_KEY + `${parameters}${valor}`
         const url = `https://api.rawg.io/api/games?key=${API_KEY_filtro}`
@@ -40,17 +46,17 @@ function Home() {
                 console.log("¡Datos recibidos!", data.results)
                 setGames(data.results)
                 setLoading(false)
-                setPagina('best')
+                setselector('ok')
             }
             catch (error) {
                 console.error("error en la respuesta del Api:", error);
                 setLoading(false)
                 setError(`Error: ${error.message}`)
-                setPagina('')
+                setselector('')
             }
         }
         obtenerJuegos()
-    }, [filtro])
+    }, [searchParams])
 
     {/* // METODO VIEJO, SINCONO
     useEffect(() => {
@@ -89,37 +95,38 @@ function Home() {
         const value = e.target.value
         if (value === 'best') {
             console.log('preparando TODOS los mejores juegos')
-            setFiltro({ tipe: '', slug: '' })
-            setPagina('')
+            setSearchParams({ tipe: '', slug: '' })
+            setselector('')
         }
         if (value === "rpg") {
             console.log('preparando juegos rpg')
-            setFiltro({ tipe: '&genres=', slug: 'role-playing-games-rpg' })
-            setPagina('')
+            setSearchParams({ tipe: '&genres=', slug: 'role-playing-games-rpg' })
+            setselector('')
         }
         if (value === 'shooter') {
             console.log('preparando juegos shooter')
-            setFiltro({ tipe: '&genres=', slug: 'shooter' })
-            setPagina('')
+            setSearchParams({ tipe: '&genres=', slug: 'shooter' })
+            setselector('')
         }
         if (value === 'mmo') {
             console.log('preparando juegos mmo')
-            setFiltro({ tipe: '&genres=', slug: 'massively-multiplayer' })
-            setPagina('')
+            setSearchParams({ tipe: '&genres=', slug: 'massively-multiplayer' })
+            setselector('')
         }
         if (value === 'simulation') {
             console.log('preparando juegos simulation')
-            setFiltro({ tipe: '&genres=', slug: 'simulation' })
-            setPagina('')
+            setSearchParams({ tipe: '&genres=', slug: 'simulation' })
+            setselector('')
         }
         if (value === 'adventure') {
             console.log('preparando juegos adventure')
-            setFiltro({ tipe: '&genres=', slug: 'adventure' })
-            setPagina('')
+            setSearchParams({ tipe: '&genres=', slug: 'adventure' })
+            setselector('')
         }
         if (value === 'openWorld') {
             console.log('preparando juegos openWorlds')
-            setFiltro({ tipe: '&tags=', slug: 'open-world' })
+            setSearchParams({ tipe: '&tags=', slug: 'open-world' })
+            setselector('')
         }
     }
 
@@ -130,7 +137,7 @@ function Home() {
     }
 
     const handleSubmitBusqueda = () => {
-        setFiltro({ tipe: '&search=', slug: busqueda })
+        setSearchParams({ tipe: '&search=', slug: busqueda })
         setBusqueda('')
     }
 
@@ -167,7 +174,7 @@ function Home() {
             </div>
             <div className='List'>
                 {loading && <span className='loading'>cargando datos</span>}
-                {pagina === 'best' && <GameList onerror={error} ongames={games} ></GameList>}
+                {selector && <GameList onerror={error} ongames={games} ></GameList>}
             </div>
         </>
     )

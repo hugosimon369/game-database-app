@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import App from "../App"
 import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 
 function GameDetails() {
@@ -9,14 +10,14 @@ function GameDetails() {
     // ESTADOS
 
     const parametros = useParams()
-    console.log(parametros)
-    console.log(API_KEY)
 
     const [gameDetails, setGameDetails] = useState()
 
     const [loadingDetails, setLoadingDetails] = useState(false)
 
     const [errorDetails, setErrorDetails] = useState('')
+
+    const navigate = useNavigate()
 
 
     // EFECTOS
@@ -26,7 +27,6 @@ function GameDetails() {
         setLoadingDetails(true)
         const id = `${parametros.id}`
         const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
-        console.log(url)
         const obtenerJuegos = async () => {
             try {
                 const respuesta = await fetch(url)
@@ -49,6 +49,12 @@ function GameDetails() {
     return (
         <div className="details-container">
             <param name="game" value={parametros.id} />
+            <button
+                onClick={() => navigate(-1)}
+                style={{ marginBottom: '20px', cursor: 'pointer' }}
+            >
+                ⬅ Volver
+            </button>
             {errorDetails && <p>{errorDetails}</p>}
             {loadingDetails && <p>Cargando detalles del juego</p>}
             {gameDetails &&

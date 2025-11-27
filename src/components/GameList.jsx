@@ -13,8 +13,8 @@ function GameList({ onerror, ongames }) {
             <p>Juegos encontrados: {games.length}</p>
             <div className="games-container">
                 {games.map(game => (
-                    <Link to={`/game/${game.id}`}>
-                        <div className="games-item" key={game.id}>
+                    <Link to={`/game/${game.id}`} key={game.id}>
+                        <div className="games-item" >
                             <p>{game.name}</p>
                             <img src={game.background_image} alt={`imagen del juego ${game.name}`} title={game.name} />
                         </div>

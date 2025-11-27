@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="main-layout">
         <h1>
           Top Games
         </h1>
