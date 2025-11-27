@@ -47,17 +47,21 @@ function GameDetails() {
 
 
     return (
-        <div>
+        <div className="details-container">
             <param name="game" value={parametros.id} />
             {errorDetails && <p>{errorDetails}</p>}
             {loadingDetails && <p>Cargando detalles del juego</p>}
             {gameDetails &&
                 <>
-                    <h2>{gameDetails.name}</h2>
-                    <img src={gameDetails.backgrond_image} alt="" title={gameDetails.name} />
-                    <p>{gameDetails.description_raw}</p>
-                    <p>{gameDetails.released}</p>
-                    <a href={gameDetails.website} target="_blanck">sitio web</a>
+                    <div className='details-header'>
+                        <h2>{gameDetails.name}</h2>
+                        <img src={gameDetails.background_image} alt="" title={gameDetails.name} />
+                    </div>
+                    <div className="details-info">
+                        <p>{gameDetails.description_raw}</p>
+                        <p>{gameDetails.released}</p>
+                        <a href={gameDetails.website} target="_blanck">sitio web</a>
+                    </div>
                 </>
             }
         </div>
