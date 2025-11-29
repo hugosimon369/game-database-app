@@ -143,14 +143,15 @@ function Home() {
 
     const handlerPageChange = (e) => {
         const valor = e.target.value
-        const paginaActual = 1
+        const paginaActual = Number(searchParams.get('page')) || 1
         let nuevaPagina = paginaActual
-        if (valor === 'back') nuevaPagina = paginaActual + 1;
+        if (valor === 'back' && nuevaPagina > 1) nuevaPagina = paginaActual - 1;
 
-        if (valor === 'next') nuevaPagina = paginaActual - 1; 
+        if (valor === 'next') nuevaPagina = paginaActual + 1;
+
         const paramsActual = Object.fromEntries([...searchParams])
-        setSearchParams({ ...paramsActual, page: nuevaPagina})
-        window.scrollTo(0,0)
+        setSearchParams({ ...paramsActual, page: nuevaPagina })
+        window.scrollTo(0, 0)
     }
 
 
