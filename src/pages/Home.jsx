@@ -21,9 +21,8 @@ function Home() {
 
     const [error, setError] = useState()
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams({ tipe: '', slug: '' })
 
-    const [pagina, setPagina] = useSearchParams()
 
 
 
@@ -32,13 +31,14 @@ function Home() {
 
     useEffect(() => { //peticion a la base de datos con ASYNC y AWAIT 
         console.log(searchParams)
-        const parameters = searchParams.get("tipe")
-        const valor = searchParams.get("slug")
+        const parameters = searchParams.get("tipe") || "";
+        const slug = searchParams.get("slug") || "";
+        const page = searchParams.get('page') || 1;
         setLoading(true)
-        const API_KEY_filtro = API_KEY + `${parameters}${valor}`
+        const API_KEY_filtro = API_KEY + `${parameters}${slug}&page=${page}`
         const url = `https://api.rawg.io/api/games?key=${API_KEY_filtro}`
+        console.log(url)
         // 2. PEDIDO: Construimos la URL con nuestra llave. Usamos comillas invertidas `` para insertar la variable.
-        console.log("Conectando con API (RAWG)...");
         const obtenerJuegos = async () => {
             try {
                 const respuesta = await fetch(url)
@@ -141,6 +141,18 @@ function Home() {
         setBusqueda('')
     }
 
+    const handlerPageChange = (e) => {
+        const valor = e.target.value
+        const paginaActual = 1
+        let nuevaPagina = paginaActual
+        if (valor === 'back') nuevaPagina = paginaActual + 1;
+
+        if (valor === 'next') nuevaPagina = paginaActual - 1; 
+        const paramsActual = Object.fromEntries([...searchParams])
+        setSearchParams({ ...paramsActual, page: nuevaPagina})
+        window.scrollTo(0,0)
+    }
+
 
 
     return (
@@ -172,9 +184,17 @@ function Home() {
                     </form>
                 </div>
             </div>
-            <div className='List'>
+            <div className='games-container'>
                 {loading && <span className='loading'>cargando datos</span>}
                 {selector && <GameList onerror={error} ongames={games} ></GameList>}
+            </div>
+            <div className="page-container">
+                <button className="page-back" onClick={handlerPageChange} value={'back'}>
+                    back
+                </button>
+                <button className="page-next" onClick={handlerPageChange} value={'next'}>
+                    next
+                </button>
             </div>
         </>
     )

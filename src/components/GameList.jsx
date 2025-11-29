@@ -11,7 +11,7 @@ function GameList({ onerror, ongames }) {
         <>
             {error && <span className='error'>codigo: {error}</span>}
             <p>Juegos encontrados: {games.length}</p>
-            <div className="games-container">
+            <div className="games-list">
                 {games.map(game => (
                     <Link to={`/game/${game.id}`} key={game.id}>
                         <div className="games-item" >
