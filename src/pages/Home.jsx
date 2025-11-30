@@ -30,14 +30,12 @@ function Home() {
 
 
     useEffect(() => { //peticion a la base de datos con ASYNC y AWAIT 
-        console.log(searchParams)
         const parameters = searchParams.get("tipe") || "";
         const slug = searchParams.get("slug") || "";
         const page = searchParams.get('page') || 1;
         setLoading(true)
         const API_KEY_filtro = API_KEY + `${parameters}${slug}&page=${page}`
         const url = `https://api.rawg.io/api/games?key=${API_KEY_filtro}`
-        console.log(url)
         // 2. PEDIDO: Construimos la URL con nuestra llave. Usamos comillas invertidas `` para insertar la variable.
         const obtenerJuegos = async () => {
             try {
@@ -193,6 +191,7 @@ function Home() {
                 <button className="page-back" onClick={handlerPageChange} value={'back'}>
                     back
                 </button>
+                {searchParams.get('page')}
                 <button className="page-next" onClick={handlerPageChange} value={'next'}>
                     next
                 </button>

@@ -46,15 +46,29 @@ function GameDetails() {
     }, [parametros])
 
 
+    // FUNCIONES
+
+
+    const handlerBack = () => {
+        if (window.history.state && window.history.state.idx > 0) {
+            navigate(-1); // Hay historial, volvemos.
+        } else {
+            navigate('/', { replace: true }); // No hay historial, vamos al Home.
+        }
+    }
+
+
+
+
     return (
         <div className="details-container">
             <param name="game" value={parametros.id} />
             <button
-                onClick={() => navigate(-1)}
+                onClick={handlerBack}
                 style={{ marginBottom: '20px', cursor: 'pointer' }}
             >
                 ⬅ Volver
-            </button>
+            </button >
             {errorDetails && <p>{errorDetails}</p>}
             {loadingDetails && <p>Cargando detalles del juego</p>}
             {gameDetails &&
@@ -65,7 +79,7 @@ function GameDetails() {
                     </div>
                     <div className="details-info">
                         <p>{gameDetails.description_raw}</p>
-                        <p>{gameDetails.released}</p>
+                        <p>Fecha de lanzamiento: {gameDetails.released}</p>
                         <a href={gameDetails.website} target="_blanck">sitio web</a>
                     </div>
                 </>
