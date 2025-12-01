@@ -1,0 +1,25 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M12 42C12 38.6863 14.6863 36 18 36H46C49.3137 36 52 38.6863 52 42V52C52 55.3137 49.3137 58 46 58H18C14.6863 58 12 55.3137 12 52V42Z"
+        fill="#5100ff" fill-opacity="0.3" />
+    <path
+        d="M12 26C12 22.6863 14.6863 20 18 20H46C49.3137 20 52 22.6863 52 26V36C52 39.3137 49.3137 42 46 42H18C14.6863 42 12 39.3137 12 36V26Z"
+        fill="#5100ff" fill-opacity="0.3" />
+    <path
+        d="M16 10C16 6.68629 18.6863 4 22 4H42C45.3137 4 48 6.68629 48 10V20C48 23.3137 45.3137 26 42 26H22C18.6863 26 16 23.3137 16 20V10Z"
+        fill="#5100ff" fill-opacity="0.3" />
+
+    <path d="M12 52C12 55.3137 14.6863 58 18 58H46C49.3137 58 52 55.3137 52 52V42H12V52Z"
+        stroke="#00ff00" stroke-width="2" />
+    <path d="M12 36H52V42H12V36Z" stroke="#00ff00" stroke-width="2" />
+    <path d="M12 26H52V30H12V26Z" stroke="#00ff00" stroke-width="2" />
+
+    <path d="M22 26V58" stroke="#00ff00" stroke-width="2" stroke-linecap="round" />
+    <path d="M42 26V58" stroke="#00ff00" stroke-width="2" stroke-linecap="round" />
+    <path d="M32 30V58" stroke="#00ff00" stroke-width="2" stroke-linecap="round"
+        stroke-dasharray="4 4" />
+
+    <path d="M32 4V26" stroke="#00ff00" stroke-width="4" stroke-linecap="round" />
+    <path d="M20 15H44" stroke="#00ff00" stroke-width="4" stroke-linecap="round" />
+    <rect x="28" y="11" width="8" height="8" rx="2" fill="#00ff00" />
+</svg>
