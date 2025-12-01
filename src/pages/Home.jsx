@@ -191,7 +191,7 @@ function Home() {
                 <button className="page-back" onClick={handlerPageChange} value={'back'}>
                     back
                 </button>
-                {searchParams.get('page')}
+                <p className="page-number">{searchParams.get('page')}</p>
                 <button className="page-next" onClick={handlerPageChange} value={'next'}>
                     next
                 </button>

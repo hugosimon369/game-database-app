@@ -53,7 +53,7 @@ function GameDetails() {
         if (window.history.state && window.history.state.idx > 0) {
             navigate(-1); // Hay historial, volvemos.
         } else {
-            navigate('/', { replace: true }); // No hay historial, vamos al Home.
+            navigate('/', ); // No hay historial, vamos al Home. { replace: true } si quisiera mantener el historial limpio.
         }
     }
 
